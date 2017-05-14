@@ -15,3 +15,6 @@ hs_err_pid*
 .idea/taike-project.iml
 .idea/vcs.xml
 .idea/workspace.xml
+.mvn/
+src/main/resources/static/
+src/main/resources/templates/
