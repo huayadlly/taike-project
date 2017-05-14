@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class CountController {
     private CountService countService;
 
     //查询数据库中记录数的借口
-    @RequestMapping(value = "/count/size")
+    @RequestMapping(value = "/count/size", method = RequestMethod.GET)
     public Map<String, String> countNumber() {
         Map<String, String> map = Maps.newHashMap();
         try {
