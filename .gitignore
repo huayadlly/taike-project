@@ -18,3 +18,7 @@ hs_err_pid*
 .mvn/
 src/main/resources/static/
 src/main/resources/templates/
+.idea/kotlinc.xml
+.idea/libraries/Maven__com_google_guava_guava_19_0.xml
+.idea/libraries/Maven__commons_dbutils_commons_dbutils_1_6.xml
+.idea/libraries/Maven__org_springframework_org_springframework_beans_unknown.xml
