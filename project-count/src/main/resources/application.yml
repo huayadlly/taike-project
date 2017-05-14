@@ -7,7 +7,7 @@ spring:
     max-idle: 20
     test-while-idle: true
     validation-query: SELECT 1
-    url: jdbc:mysql://192.168.0.111:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
 
@@ -15,7 +15,7 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://192.168.0.111:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
 
@@ -23,7 +23,7 @@ spring:
 spring:
   profiles: development
   datasource:
-    url: jdbc:mysql://192.168.0.111:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
 
@@ -31,7 +31,7 @@ spring:
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://192.168.0.111:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
 
