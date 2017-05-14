@@ -52,7 +52,12 @@ public class CountController {
             Integer sizeFrozen = size;
             logger.info("开始备份：[{}]", sizeFrozen);
 
-            //遍历集合--list.forEach(book -> {});
+            /*
+            遍历集合--
+                list.forEach(book -> {
+                    //使用这种方式遍历集合的时候，内部只能使用变量，不能改变变量的值;
+                });
+            */
             for (Book book : list) {
                 //降数据保存到数据库中
                 countService.saveBook(book);
