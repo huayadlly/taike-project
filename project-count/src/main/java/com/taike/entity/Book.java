@@ -13,8 +13,11 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @Column(name = "book_info_id")
+    private String bookInfoId;
 
     @Column(name = "book_name")
     private String bookName;
@@ -26,13 +29,13 @@ public class Book {
     private String type;
 
     @Column(name = "book_id")
-    private String bookId;
+    private Long bookId;
 
-    public String getBookId() {
+    public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
@@ -68,11 +71,19 @@ public class Book {
         this.type = type;
     }
 
+    public String getBookInfoId() {
+        return bookInfoId;
+    }
+
+    public void setBookInfoId(String bookInfoId) {
+        this.bookInfoId = bookInfoId;
+    }
 
     public Book() {
     }
 
-    public Book(String bookName, String projectName, String type, String bookId) {
+    public Book(String bookInfoId, String bookName, String projectName, String type, Long bookId) {
+        this.bookInfoId = bookInfoId;
         this.bookName = bookName;
         this.projectName = projectName;
         this.type = type;
