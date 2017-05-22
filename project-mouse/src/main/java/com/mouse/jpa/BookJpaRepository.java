@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface BookJpaRepository extends JpaRepository<Book, Integer> {
 
     //统计表中数据
-//    Long countDistinctById();
+    long countBookByIdIs(Integer id);
 
-    Long countbyId(Integer id);
-
+    //统计表中全部的数据
+    long count();
 
 }

@@ -21,8 +21,13 @@ public class BookController {
     public Map<String, String> getCount() {
         Map<String, String> map = Maps.newHashMap();
         try {
-            Long size = bookJpaRepository.countbyId(2);
-            map.put("COUNT", String.valueOf(size));
+            //条件统计表中的记录
+            Long size = bookJpaRepository.countBookByIdIs(2);
+            //统计表中的全部记录
+            long totalCount = bookJpaRepository.count();
+
+            map.put("COUNT", String.valueOf(totalCount));
+            map.put("size", String.valueOf(size));
             map.put("SUCCESS", "Y");
         } catch (Exception e) {
             map.put("SUCCESS", "N");

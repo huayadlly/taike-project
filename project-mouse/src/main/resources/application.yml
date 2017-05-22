@@ -2,11 +2,6 @@ spring:
   profiles:
     active: development
   datasource:
-    initial-size: 1
-    max-active: 20
-    max-idle: 20
-    test-while-idle: true
-    validation-query: SELECT 1
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
