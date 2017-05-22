@@ -3,7 +3,9 @@ package com.mouse.utils;
 import com.google.common.collect.Lists;
 
 import java.io.File;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -29,6 +31,23 @@ public class FileTraversalUtils {
         }
         return list;
     }
+
+    //Java8的方式遍历文件夹
+    public static List<File> traversalDirectoryJava8(Path start) {
+        List<File> list = Lists.newArrayList();
+        try {
+            Files.walkFileTree(start, EnumSet.allOf(FileVisitOption.class), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     //判断文件是否满足条件
     public static boolean isCondition(File file) {
