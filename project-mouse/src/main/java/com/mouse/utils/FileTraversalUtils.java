@@ -21,7 +21,7 @@ public class FileTraversalUtils {
             if (f.isDirectory()) {
                 traversalDirectory(f.toPath());
             } else {
-                if (isCondition()) {
+                if (isCondition(f)) {
                     //TODO 对满足条件的文件进行操作
                     list.add(f);
                 }
@@ -31,7 +31,10 @@ public class FileTraversalUtils {
     }
 
     //判断文件是否满足条件
-    public static boolean isCondition() {
+    public static boolean isCondition(File file) {
+        if (file.getName().startsWith(".")) {
+            return false;
+        }
         return true;
     }
 }
