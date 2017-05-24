@@ -1,13 +1,16 @@
 package com.mouse.utils;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -70,5 +73,22 @@ public class FileTraversalUtils {
             ),
             FileFilterUtils.suffixFileFilter(".xlsx") //只要结尾为“.xlsx”的文件
     );
+
+
+    //神奇：获得Connection<File>文件集合
+    public static void aaa(String path){
+        File file = new File(path);
+
+        Collection<File> result = FileUtils.listFiles(
+                file,
+                FileFilterUtils.notFileFilter(
+                        FileFilterUtils.prefixFileFilter(".")
+                ),
+                FileFilterUtils.trueFileFilter()
+        );
+
+        Iterator<File> iterator = result.iterator();
+
+    }
 
 }
