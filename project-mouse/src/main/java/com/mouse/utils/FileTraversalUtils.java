@@ -1,8 +1,10 @@
 package com.mouse.utils;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.EnumSet;
@@ -32,23 +34,6 @@ public class FileTraversalUtils {
         return list;
     }
 
-    //Java8的方式遍历文件夹
-    public static List<File> traversalDirectoryJava8(Path start) {
-        List<File> list = Lists.newArrayList();
-        try {
-            Files.walkFileTree(start, EnumSet.allOf(FileVisitOption.class), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-
     //判断文件是否满足条件
     public static boolean isCondition(File file) {
         if (file.getName().startsWith(".")) {
@@ -56,4 +41,34 @@ public class FileTraversalUtils {
         }
         return true;
     }
+
+
+    //Java8的方式遍历文件夹
+    public static List<File> traversalDirectoryJava8(Path start) {
+        List<File> list = Lists.newArrayList();
+        try {
+            Files.walkFileTree(start, EnumSet.allOf(FileVisitOption.class), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    if (fileFilter.accept(file.toFile())) {
+                        //满足条件，将文件添加到集合中
+                        list.add(file.toFile());
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //定义一个过滤器接口，接受指定类型的文件
+    public static FileFilter fileFilter = FileFilterUtils.and(
+            FileFilterUtils.fileFileFilter(),
+            FileFilterUtils.notFileFilter(
+                    FileFilterUtils.prefixFileFilter("~$") //不要开头为“~$”的文件
+            ),
+            FileFilterUtils.suffixFileFilter(".xlsx") //只要结尾为“.xlsx”的文件
+    );
+
 }
