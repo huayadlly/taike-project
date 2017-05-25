@@ -1,5 +1,6 @@
 package com.mouse.utils;
 
+import ch.qos.logback.core.rolling.helper.FileFilterUtil;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -74,20 +75,33 @@ public class FileTraversalUtils {
             FileFilterUtils.suffixFileFilter(".xlsx") //只要结尾为“.xlsx”的文件
     );
 
+    private static List<File> fileList = Lists.newArrayList();
 
     //神奇：获得Connection<File>文件集合
-    public static void aaa(String path){
+    public static List<File> aaa(String path) {
         File file = new File(path);
 
         Collection<File> result = FileUtils.listFiles(
                 file,
-                FileFilterUtils.notFileFilter(
-                        FileFilterUtils.prefixFileFilter(".")
+                FileFilterUtils.and(
+                        FileFilterUtils.notFileFilter(
+                                FileFilterUtils.prefixFileFilter(".")
+                        ),
+                        FileFilterUtils.notFileFilter(
+                                FileFilterUtils.prefixFileFilter("~$")
+                        ),
+                        FileFilterUtils.suffixFileFilter(".txt")
                 ),
                 FileFilterUtils.trueFileFilter()
         );
 
-        Iterator<File> iterator = result.iterator();
+        result.forEach(it -> fileList.add(it));
+        return fileList;
+    }
+
+    public static void main(String[] args) {
+        List<File> aaa = aaa("D:\\test");
+        aaa.forEach(file -> System.out.println("name:"+file.getName()));
 
     }
 
