@@ -214,3 +214,5 @@ gradle-app.setting
 wordoutput/longman.txt
 wordoutput/maintable.txt
 
+project-mouse/.mvn/wrapper/maven-wrapper.properties
+project-mouse/mvnw
