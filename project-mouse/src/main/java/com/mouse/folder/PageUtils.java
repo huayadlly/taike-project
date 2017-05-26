@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.mouse.entity.Book;
+import lombok.Data;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 /**
  * Created by huayadlly on 2017/5/25.
  */
+@Data
 @Component
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PageUtils {
@@ -24,8 +27,8 @@ public class PageUtils {
     @JsonProperty(value = "page_size")
     private Integer pageSize;
 
-    @JsonProperty(value = "start_page")
-    private Integer startPage;
+    @JsonProperty(value = "current_page")
+    private Integer currentPage;
 
     @JsonProperty(value = "start_index")
     private Integer startIndex;
@@ -36,55 +39,13 @@ public class PageUtils {
     public PageUtils() {
     }
 
-//    public PageUtils(){
-//
-//    }
-
-    public Integer getTotalCount() {
-        return totalCount;
+    public PageUtils(Page<Book> pageBook) {
+        this.totalCount = pageBook.getNumberOfElements();
+        this.totalPage = pageBook.getTotalPages();
+        this.pageSize = pageBook.getSize();
+        this.currentPage = pageBook.getNumber();
+        this.entityList = pageBook.getContent();
+        this.startIndex = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
     }
 
-    public void setTotalCount(Integer totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public Integer getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getStartPage() {
-        return startPage;
-    }
-
-    public void setStartPage(Integer startPage) {
-        this.startPage = startPage;
-    }
-
-    public Integer getStartIndex() {
-        return startIndex;
-    }
-
-    public void setStartIndex(Integer startIndex) {
-        this.startIndex = startIndex;
-    }
-
-    public List<Book> getEntityList() {
-        return entityList;
-    }
-
-    public void setEntityList(List<Book> entityList) {
-        this.entityList = entityList;
-    }
 }
