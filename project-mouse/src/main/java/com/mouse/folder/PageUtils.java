@@ -40,12 +40,12 @@ public class PageUtils {
     }
 
     public PageUtils(Page<Book> pageBook) {
-        this.totalCount = pageBook.getNumberOfElements();
+        this.totalCount = new Long(pageBook.getTotalElements()).intValue();//通过分页方式统计表中总记录数
         this.totalPage = pageBook.getTotalPages();
         this.pageSize = pageBook.getSize();
         this.currentPage = pageBook.getNumber();
         this.entityList = pageBook.getContent();
-        this.startIndex = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
+        this.startIndex = (currentPage - 1) * pageSize;
     }
 
 }
