@@ -48,4 +48,12 @@ public class PageUtils {
         this.startIndex = (currentPage - 1) * pageSize;
     }
 
+    public PageUtils(Integer startPage, Integer pageSize, Integer startIndex, Integer totalCount, List<Book> bookList) {
+        this.startIndex = startIndex;
+        this.pageSize = pageSize;
+        this.currentPage = startPage;
+        this.totalCount = totalCount;
+        this.totalPage = (totalCount % pageSize == 0) ? totalCount / pageSize : (totalCount / pageSize) + 1;
+        this.entityList = bookList;
+    }
 }
