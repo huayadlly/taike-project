@@ -1,7 +1,7 @@
 package com.mouse.utils;
 
-import ch.qos.logback.core.rolling.helper.FileFilterUtil;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 
@@ -9,16 +9,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by huayadlly on 2017/5/22.
  */
 public class FileTraversalUtils {
-
 
     //遍历文件夹:递归方式遍历文件夹
     public static List<File> traversalDirectory(Path path) {
@@ -75,6 +71,8 @@ public class FileTraversalUtils {
             FileFilterUtils.suffixFileFilter(".xlsx") //只要结尾为“.xlsx”的文件
     );
 
+
+
     private static List<File> fileList = Lists.newArrayList();
 
     //神奇：获得Connection<File>文件集合
@@ -99,9 +97,33 @@ public class FileTraversalUtils {
         return fileList;
     }
 
+    //定义存储文件的集合，定义排序顺序
+    private static TreeSet<File> set = Sets.newTreeSet(Comparator.comparing(File::getName));
+
+    //文件的遍历
+    public static List<File> runFolder(File file) {
+        File[] files = file.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                //判断遍历文件是否满足条件
+                if (!pathname.isDirectory()) {
+                    return !pathname.getName().startsWith(".") && pathname.getName().endsWith(".jpg");
+                } else {
+                    runFolder(pathname);
+                }
+                return false;
+            }
+        });
+
+        if (files != null && files.length != 0) {
+            Collections.addAll(set, files);
+        }
+        return Lists.newArrayList(set);
+    }
+
     public static void main(String[] args) {
-        List<File> aaa = aaa("D:\\test");
-        aaa.forEach(file -> System.out.println("name:"+file.getName()));
+        List<File> aaa = runFolder(new File("D:\\test"));
+        aaa.forEach(file -> System.out.println("name:" + file.getName()));
 
     }
 
