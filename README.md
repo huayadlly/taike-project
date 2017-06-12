@@ -10,3 +10,4 @@ This is a personal project for learn how to use git.
     3.文件遍历的4中方式：递归遍历、文件过滤器等；
     4.转换集合的类型：Lists.transform()；
     5.spring data jpa的使用：统计表中的记录数；
+    6.MongoDB数据库的练习与使用；
