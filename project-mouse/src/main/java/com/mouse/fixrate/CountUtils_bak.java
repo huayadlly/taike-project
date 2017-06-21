@@ -116,9 +116,14 @@ public class CountUtils_bak {
 
 
     public static void main(String[] args) {
-        List<Double> calculate = calculate(33, 54, 77, 97, 11, 13, 17, 23, 29);
+//        List<Double> calculate = calculate(33, 54, 77, 97, 11, 13, 17, 23, 29);
 //        List<Double> calculate = calculate(3, 5, 7, 9, 11, 13, 17, 29, 23);
 //        List<Double> calculate = calculate(3, 3, 3, 3, 3, 3, 3, 3, 3);
+
+        List<Double> calculate = calculate(33, 54, 77, 97, 11, 13, 17, 23, 29);
+//        List<Double> calculate = calculate(3, 5, 7, 9, 11, 13, 17, 29, 23);
+//        List<Double> calculate = calculate(3, 3, 4, 4, 7);
+//        List<Double> calculate = calculate(3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3);
         System.out.println(calculate);
     }
 }
