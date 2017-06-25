@@ -1,9 +1,11 @@
 package com.mouse.mongo;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mouse.entity.Book;
 import com.mouse.folder.PageUtils;
 import com.mouse.jpa.BookJpaRepository;
+import com.mouse.mongo.entity.MongoBook;
 import com.mouse.mongo.jpa.BookMongoDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,12 +39,24 @@ public class MongoController {
         try {
 
             //分页查询
-            Pageable pageable = new PageRequest(2,10, Sort.Direction.ASC);
+            Pageable pageable = new PageRequest(2, 10, Sort.Direction.ASC);
             Page<Book> bookByPage = bookJpaRepository.findAll(pageable);
             List<Book> bookList = bookByPage.getContent();
 
+            List<MongoBook> mongoBooksList = Lists.newArrayList();
+            bookList.forEach(book -> {
+                MongoBook newBook = new MongoBook();
+                newBook.setId(book.getId());
+                newBook.setBookId(book.getBookId());
+                newBook.setBookInfoId(book.getBookInfoId());
+                newBook.setBookName(book.getBookName());
+                newBook.setProjectName(book.getProjectName());
+                newBook.setType(book.getType());
+                mongoBooksList.add(newBook);
+            });
+
             //向mongo数据库中存
-            bookMongoDbRepository.save(bookList);
+            bookMongoDbRepository.save(mongoBooksList);
 
             msg.put("SUCCESS", "YES");
         } catch (Exception e) {
