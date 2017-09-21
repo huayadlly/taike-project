@@ -5,6 +5,13 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
+  data:
+    mongodb:
+      host: localhost
+      username: bookAdmin
+      password: 123456
+      authentication-database: book
+      database: book
 
 ---
 spring:
@@ -13,6 +20,13 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
+  data:
+    mongodb:
+      host: localhost
+      username: bookAdmin
+      password: 123456
+      authentication-database: book
+      database: book
 
 ---
 spring:
@@ -21,6 +35,13 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
+  data:
+    mongodb:
+      host: localhost
+      username: bookAdmin
+      password: 123456
+      authentication-database: book
+      database: book
 
 ---
 spring:
@@ -29,4 +50,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
-
+  data:
+    mongodb:
+      host: localhost
+      username: bookAdmin
+      password: 123456
+      authentication-database: book
+      database: book
